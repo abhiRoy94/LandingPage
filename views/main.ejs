@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Landing Page</title>
+</head>
+
+<body>
+
+  <h1> Today is <%= currentDay %> </h1>
+
+  <form class="" action="/" method="post">
+    <label for="city">City Name:</label>
+    <input id="city" type="text" name="cityName">
+    <button type="submit" name="button">Send</button>
+  </form>
+
+  <% if (weatherPlace != "") { %>
+    <p>The weather in <%= weatherPlace %> is <%= weatherTemp %> with <%= weatherTempStatus %></p>
+    <img src="<%= weatherImage %>">
+  <% } %>
+
+
+
+</body>
+
+
+</html>
