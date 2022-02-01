@@ -4,7 +4,8 @@ const bodyParser = require('body-parser');
 const https = require('https');
 
 // Internal Packages
-const date = require(__dirname + "/apis/date.js")
+const date = require(__dirname + "/apis/date.js");
+const weather = require(__dirname + "/apis/weather.js");
 
 const app = express();
 
@@ -13,31 +14,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set('view engine', 'ejs');
 
 // Global API variables
-let weatherPlace = "";
-let weatherTemp = "";
-let weatherStatus = "";
-let weatherImage = "";
-
-function getWeather(req, res) {
-  weatherPlace = req.body.cityName;
-  const apiKey = "e3e25755205bb9b1d963a9ad4366cb91";
-  const units = "imperial";
-  const url = "https://api.openweathermap.org/data/2.5/weather?q=" + weatherPlace + "&appid=" + apiKey + "&units=" + units + "";
-
-  // Get the response
-  https.get(url, function(response) {
-
-    response.on('data', function(data) {
-
-      weatherData = JSON.parse(data);
-      weatherTemp = weatherData.main.temp;
-      weatherStatus = weatherData.weather[0].description;
-      const icon = weatherData.weather[0].icon;
-      weatherImage = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
-
-    });
-  });
-
+let myWeather = {
+  myPlace: "",
+  myTemp: "",
+  myStatus: "",
+  myImage: ""
 }
 
 app.get("/", function(req, res) {
@@ -48,19 +29,20 @@ app.get("/", function(req, res) {
   // Set object
   const renderObject = {
     currentDay: myDay,
-    weatherPlace: weatherPlace,
-    weatherTemp: weatherTemp,
-    weatherTempStatus: weatherStatus,
-    weatherImage: weatherImage
+    weatherPlace: myWeather.myPlace,
+    weatherTemp: myWeather.myTemp,
+    weatherTempStatus: myWeather.myStatus,
+    weatherImage: myWeather.myImage
   }
 
-  console.log("Temp: " + weatherTemp + ", status: " + weatherStatus);
   res.render('main', renderObject);
 });
 
 app.post("/", function(req, res) {
 
-  getWeather(req, res);
+  // TODO: CREATE A WAY TO WAIT FOR THE WEATHER API TO COME BACK
+  let weatherObj = weather.getWeather(req);
+
   res.redirect("/");
 })
 
