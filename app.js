@@ -1,6 +1,10 @@
+// External Packages
 const express = require('express');
 const bodyParser = require('body-parser');
 const https = require('https');
+
+// Internal Packages
+const date = require(__dirname + "/apis/date.js")
 
 const app = express();
 
@@ -13,19 +17,6 @@ let weatherPlace = "";
 let weatherTemp = "";
 let weatherStatus = "";
 let weatherImage = "";
-
-function getDay() {
-  // Set the current Day options
-  let today = new Date();
-  let options = {
-    weekday: "long",
-    day: "numeric",
-    month: "long"
-  }
-
-  let day = today.toLocaleDateString("en-US", options);
-  return day;
-}
 
 function getWeather(req, res) {
   weatherPlace = req.body.cityName;
@@ -52,7 +43,7 @@ function getWeather(req, res) {
 app.get("/", function(req, res) {
 
   // Get current day and set it in the ejs file
-  let myDay = getDay();
+  let myDay = date.getDate();
 
   // Set object
   const renderObject = {
@@ -68,7 +59,7 @@ app.get("/", function(req, res) {
 });
 
 app.post("/", function(req, res) {
-  
+
   getWeather(req, res);
   res.redirect("/");
 })
