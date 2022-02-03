@@ -38,10 +38,15 @@ app.get("/", function(req, res) {
   res.render('main', renderObject);
 });
 
-app.post("/", function(req, res) {
+app.post("/", async function(req, res) {
 
-  // TODO: CREATE A WAY TO WAIT FOR THE WEATHER API TO COME BACK
-  let weatherObj = weather.getWeather(req);
+  // Wait for weather API to come back with data and update weather object
+  let weatherObj = await weather.getWeather(req);
+  myWeather.myPlace = weatherObj.weatherPlace[0].toUpperCase() + weatherObj.weatherPlace.slice(1);
+  myWeather.myTemp = weatherObj.weatherTemp;
+  myWeather.myStatus = weatherObj.weatherStatus;
+  myWeather.myImage = weatherObj.weatherImage;
+
 
   res.redirect("/");
 })

@@ -18,9 +18,11 @@
     <button type="submit" name="button">Send</button>
   </form>
 
-  <% if ( weatherPlace != "") { %>
-    <p>The weather in <%= weatherPlace %> is <%= weatherTemp %> with <%= weatherTempStatus %></p>
+  <% if(weatherTemp != "") { %>
+    <p>The weather in <%= weatherPlace %> is <%= weatherTemp %> degrees Farenheit with <%= weatherTempStatus %></p>
     <img src="<%= weatherImage %>">
+  <% } else { %>
+    <p>Weather cannot be found in <%= weatherPlace %>!!</p>
   <% } %>
 
 
