@@ -6,6 +6,7 @@ const https = require('https');
 // Internal Packages
 const date = require(__dirname + "/apis/date.js");
 const weather = require(__dirname + "/apis/weather.js");
+const quote = require(__dirname + "/apis/quotes.js");
 
 const app = express();
 
@@ -20,19 +21,26 @@ let myWeather = {
   myStatus: "",
   myImage: ""
 }
+let myQuoteData = {
+  myQuote: "",
+  myAuther: ""
+};
 
 app.get("/", function(req, res) {
 
   // Get current day and set it in the ejs file
   let myDay = date.getDate();
 
+  // Get a quote of the Day
+  let newQuote = quote.getQuoteOfTheDay();
+  myQuoteData.myQuote = newQuote.quoteText;
+  myQuoteData.myAuthor = newQuote.quoteAuthor;
+
   // Set object
   const renderObject = {
     currentDay: myDay,
-    weatherPlace: myWeather.myPlace,
-    weatherTemp: myWeather.myTemp,
-    weatherTempStatus: myWeather.myStatus,
-    weatherImage: myWeather.myImage
+    weatherData: myWeather,
+    quoteOfTheDay: myQuoteData
   }
 
   res.render('main', renderObject);
@@ -41,11 +49,14 @@ app.get("/", function(req, res) {
 app.post("/", async function(req, res) {
 
   // Wait for weather API to come back with data and update weather object
-  let weatherObj = await weather.getWeather(req);
-  myWeather.myPlace = weatherObj.weatherPlace[0].toUpperCase() + weatherObj.weatherPlace.slice(1);
-  myWeather.myTemp = weatherObj.weatherTemp;
-  myWeather.myStatus = weatherObj.weatherStatus;
-  myWeather.myImage = weatherObj.weatherImage;
+  if (req.body.cityName != "") {
+    let weatherObj = await weather.getWeather(req);
+    myWeather.myPlace = weatherObj.weatherPlace[0].toUpperCase() + weatherObj.weatherPlace.slice(1);
+    myWeather.myTemp = weatherObj.weatherTemp;
+    myWeather.myStatus = weatherObj.weatherStatus;
+    myWeather.myImage = weatherObj.weatherImage;
+  }
+
 
 
   res.redirect("/");

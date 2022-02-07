@@ -12,19 +12,23 @@
 
   <h1> Today is <%= currentDay %> </h1>
 
+  <h2>Weather</h2>
   <form class="" action="/" method="post">
     <label for="city">City Name:</label>
     <input id="city" type="text" name="cityName">
     <button type="submit" name="button">Send</button>
   </form>
 
-  <% if(weatherTemp != "") { %>
-    <p>The weather in <%= weatherPlace %> is <%= weatherTemp %> degrees Farenheit with <%= weatherTempStatus %></p>
-    <img src="<%= weatherImage %>">
-  <% } else { %>
-    <p>Weather cannot be found in <%= weatherPlace %>!!</p>
+  <% if(weatherData.myTemp != "") { %>
+    <p>The weather in <%= weatherData.myPlace %> is <%= weatherData.myTemp %> degrees Farenheit with <%= weatherData.myStatus %></p>
+    <img src="<%= weatherData.myImage %>">
+  <% } else if (weatherData.myPlace != "") { %>
+    <p>Weather cannot be found in <%= weatherData.myPlace %>!!</p>
   <% } %>
 
+  <h2>Quote of the Day</h2>
+  <p> "<%= quoteOfTheDay.myQuote %>" </p>
+  <p>By <%= quoteOfTheDay.myAuthor %> </p>
 
 
 </body>
