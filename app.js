@@ -2,6 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const https = require('https');
+const schedule = require('node-schedule');
 
 // Internal Packages
 const date = require(__dirname + "/apis/date.js");
@@ -31,10 +32,16 @@ app.get("/", function(req, res) {
   // Get current day and set it in the ejs file
   let myDay = date.getDate();
 
-  // Get a quote of the Day
+  // Get default quote of the Day and run cron job to get a new quote every 24 hrs
   let newQuote = quote.getQuoteOfTheDay();
   myQuoteData.myQuote = newQuote.quoteText;
   myQuoteData.myAuthor = newQuote.quoteAuthor;
+
+  var job = schedule.scheduleJob('0 0 * * *', function() {
+    newQuote = quote.getQuoteOfTheDay();
+    myQuoteData.myQuote = newQuote.quoteText;
+    myQuoteData.myAuthor = newQuote.quoteAuthor;
+  });
 
   // Set object
   const renderObject = {
@@ -56,9 +63,7 @@ app.post("/", async function(req, res) {
     myWeather.myStatus = weatherObj.weatherStatus;
     myWeather.myImage = weatherObj.weatherImage;
   }
-
-
-
+  
   res.redirect("/");
 })
 
