@@ -20,15 +20,31 @@
   </form>
 
   <% if(weatherData.myTemp != "") { %>
-    <p>The weather in <%= weatherData.myPlace %> is <%= weatherData.myTemp %> degrees Farenheit with <%= weatherData.myStatus %></p>
-    <img src="<%= weatherData.myImage %>">
+  <p>The weather in <%= weatherData.myPlace %> is <%= weatherData.myTemp %> degrees Farenheit with <%= weatherData.myStatus %></p>
+  <img src="<%= weatherData.myImage %>">
   <% } else if (weatherData.myPlace != "") { %>
-    <p>Weather cannot be found in <%= weatherData.myPlace %>!!</p>
+  <p>Weather cannot be found in <%= weatherData.myPlace %>!!</p>
   <% } %>
 
   <h2>Quote of the Day</h2>
   <p> "<%= quoteOfTheDay.myQuote %>" </p>
   <p>By <%= quoteOfTheDay.myAuthor %> </p>
+
+  <h2>News</h2>
+  <form class="" action="/news" method="post">
+    <select name='newsQuery'>
+      <optgroup label="news">
+        <option value='general'>General</option>
+        <option value='business'>Business</option>
+        <option value='entertainment'>Entertainment</option>
+        <option value='health'>Health</option>
+        <option value='science'>Science</option>
+        <option value='sports'>Sports</option>
+        <option value='technology'>Technology</option>
+      </optgroup>
+    </select>
+    <input type="submit">
+  </form>
 
 
 </body>

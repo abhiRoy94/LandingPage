@@ -8,6 +8,7 @@ const schedule = require('node-schedule');
 const date = require(__dirname + "/apis/date.js");
 const weather = require(__dirname + "/apis/weather.js");
 const quote = require(__dirname + "/apis/quotes.js");
+const news = require(__dirname + "/apis/news.js");
 
 const app = express();
 
@@ -55,6 +56,8 @@ app.get("/", function(req, res) {
 
 app.post("/", async function(req, res) {
 
+  console.log(req.body);
+
   // Wait for weather API to come back with data and update weather object
   if (req.body.cityName != "") {
     let weatherObj = await weather.getWeather(req);
@@ -63,10 +66,19 @@ app.post("/", async function(req, res) {
     myWeather.myStatus = weatherObj.weatherStatus;
     myWeather.myImage = weatherObj.weatherImage;
   }
-  
+
   res.redirect("/");
 })
 
+
+app.post("/news", async function(req, res) {
+
+  //console.log(req.body.newsQuery);
+
+  let newsObject = await news.getNews(req, req.body.newsQuery);
+
+  res.render('news');
+})
 
 app.listen(3000, function() {
   console.log("Server started on port 3000.");
