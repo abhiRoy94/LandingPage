@@ -17,14 +17,10 @@ exports.getNews = async function getNews(req, query) {
   try {
     response = await got(url, {json:true});
 
-    //console.log(response.body)
-    console.log(response.body.data);
-
-    //console.log(myWeatherObj);
   }
   catch (error) {
     console.log(error.response.body);
   }
 
-  return response.body;
+  return response.body.data;
 }

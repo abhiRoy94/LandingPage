@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>News</title>
-  </head>
-  <body>
-      <h1>Welcome! Here is the news that you querried for!</h1>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <title>News</title>
+</head>
+
+<body>
+  <h1>Welcome! Here is the news that you querried for!</h1>
+
+  <% articles.forEach(function(article) { %>
+  <h2> <%= article.title %> </h2>
+  <p> <%= article.description %> ... <a href="<%=article.url%>">Link to Article</a> </p>
+  <% })%>
+  <br>
+</body>
+
 </html>

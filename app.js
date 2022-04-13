@@ -75,9 +75,10 @@ app.post("/news", async function(req, res) {
 
   //console.log(req.body.newsQuery);
 
-  let newsObject = await news.getNews(req, req.body.newsQuery);
+  let newsObjects = await news.getNews(req, req.body.newsQuery);
+  console.log(newsObjects);
 
-  res.render('news');
+  res.render('news', {articles: newsObjects});
 })
 
 app.listen(3000, function() {
