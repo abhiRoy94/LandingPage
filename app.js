@@ -14,6 +14,7 @@ const app = express();
 
 // Using features with Express
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static("public"));
 app.set('view engine', 'ejs');
 
 // Global API variables

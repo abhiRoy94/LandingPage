@@ -1,0 +1,26 @@
+/* Main page styles */
+body {
+  background-color: #417D7A;
+  text-align: center;
+}
+
+/* Containers */
+.container-fluid {
+  padding: 7% 3%;
+}
+
+/* Intro Section */
+.intro-header {
+  background-color: #EDE6DB;
+}
+
+.intro-name {
+  padding: 0% 7% 7%;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 5em;
+}
+
+.intro-date {
+  font-family: 'Akshar', sans-serif;
+  font-size: 3em;
+}

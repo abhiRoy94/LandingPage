@@ -1,53 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('partials/header.ejs') %>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Landing Page</title>
-</head>
+<section class="intro-header">
 
-<body>
+  <div class='container-fluid'>
 
-  <h1> Today is <%= currentDay %> </h1>
+    <h1 class="intro-name">Welcome, Abhishek!</h1>
+    <p class="intro-date">Today is <%= currentDay %></p>
 
-  <h2>Weather</h2>
-  <form class="" action="/" method="post">
-    <label for="city">City Name:</label>
-    <input id="city" type="text" name="cityName">
-    <button type="submit" name="button">Send</button>
-  </form>
+  </div>
 
-  <% if(weatherData.myTemp != "") { %>
-  <p>The weather in <%= weatherData.myPlace %> is <%= weatherData.myTemp %> degrees Farenheit with <%= weatherData.myStatus %></p>
-  <img src="<%= weatherData.myImage %>">
-  <% } else if (weatherData.myPlace != "") { %>
-  <p>Weather cannot be found in <%= weatherData.myPlace %>!!</p>
-  <% } %>
+</section>
 
-  <h2>Quote of the Day</h2>
-  <p> "<%= quoteOfTheDay.myQuote %>" </p>
-  <p>By <%= quoteOfTheDay.myAuthor %> </p>
+<h2>Weather</h2>
+<form class="" action="/" method="post">
+  <label for="city">City Name:</label>
+  <input id="city" type="text" name="cityName">
+  <button type="submit" name="button">Send</button>
+</form>
 
-  <h2>News</h2>
-  <form class="" action="/news" method="post">
-    <select name='newsQuery'>
-      <optgroup label="news">
-        <option value='general'>General</option>
-        <option value='business'>Business</option>
-        <option value='entertainment'>Entertainment</option>
-        <option value='health'>Health</option>
-        <option value='science'>Science</option>
-        <option value='sports'>Sports</option>
-        <option value='technology'>Technology</option>
-      </optgroup>
-    </select>
-    <input type="submit">
-  </form>
+<% if(weatherData.myTemp != "") { %>
+<p>The weather in <%= weatherData.myPlace %> is <%= weatherData.myTemp %> degrees Farenheit with <%= weatherData.myStatus %></p>
+<img src="<%= weatherData.myImage %>">
+<% } else if (weatherData.myPlace != "") { %>
+<p>Weather cannot be found in <%= weatherData.myPlace %>!!</p>
+<% } %>
 
+<h2>Quote of the Day</h2>
+<p> "<%= quoteOfTheDay.myQuote %>" </p>
+<p>By <%= quoteOfTheDay.myAuthor %> </p>
 
-</body>
+<h2>News</h2>
+<form class="" action="/news" method="post">
+  <select name='newsQuery'>
+    <optgroup label="news">
+      <option value='general'>General</option>
+      <option value='business'>Business</option>
+      <option value='entertainment'>Entertainment</option>
+      <option value='health'>Health</option>
+      <option value='science'>Science</option>
+      <option value='sports'>Sports</option>
+      <option value='technology'>Technology</option>
+    </optgroup>
+  </select>
+  <input type="submit">
+</form>
 
+<%- include('partials/footer.ejs') %>
 
 </html>
