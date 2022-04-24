@@ -12,10 +12,11 @@ body {
 /* Intro Section */
 .intro-header {
   background-color: #EDE6DB;
+  padding: 3% 5%;
 }
 
 .intro-name {
-  padding: 0% 7% 7%;
+  padding: 0% 7% 3%;
   font-family: 'Bebas Neue', cursive;
   font-size: 5em;
 }
@@ -23,4 +24,23 @@ body {
 .intro-date {
   font-family: 'Akshar', sans-serif;
   font-size: 3em;
+}
+
+
+/* Carousel - API Sections */
+.api-title {
+  font-size: 3em;
+  padding: 0% 0% 5%;
+  color: #EDE6DB;
+}
+
+/* Weather Section */
+.weather-info {
+  font-size: 2.5em;
+  color: #EDE6DB;
+}
+
+.weather-temp {
+  font-size: 2em;
+  color: #EDE6DB;
 }

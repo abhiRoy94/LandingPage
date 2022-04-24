@@ -29,7 +29,7 @@ exports.getWeather = async function getWeather(req) {
     response = await got(url, {json:true});
     let weatherData = response.body;
 
-    myWeatherObj.weatherTemp = weatherData.main.temp;
+    myWeatherObj.weatherTemp = Math.floor(weatherData.main.temp);
     myWeatherObj.weatherStatus = weatherData.weather[0].description;
     const icon = weatherData.weather[0].icon;
     myWeatherObj.weatherImage = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
